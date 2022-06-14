@@ -1,10 +1,18 @@
-import { ImageBackground, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 
 import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
 
 import { Camera, CameraType } from "expo-camera";
 import { useState, useEffect } from "react";
+
+import axios from "axios";
+import { createIconSetFromFontello } from "@expo/vector-icons";
 
 export default function TabOneScreen() {
   const [hasPermission, setHasPermission] = useState(false);
@@ -13,6 +21,7 @@ export default function TabOneScreen() {
   const [previewVisible, setPreviewVisible] = useState(false);
   const [capturedImage, setCapturedImage] = useState<any>(null);
   const [metadata, setMetadata] = useState("");
+  const [sendMetadata, setSendMetadata] = useState<any>(null);
 
   let camera: Camera;
 
@@ -40,12 +49,15 @@ export default function TabOneScreen() {
 
     setPreviewVisible(true);
     setCapturedImage(photo);
-    setMetadata(JSON.stringify(photo.exif));
+    setMetadata(JSON.stringify(photo));
+    setSendMetadata(photo);
   };
 
   const retakePicture = () => {
     setCapturedImage(null);
     setPreviewVisible(false);
+    setMetadata("");
+    setSendMetadata(null);
 
     async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
@@ -53,7 +65,31 @@ export default function TabOneScreen() {
     };
   };
 
-  const CameraPreview = ({ photo, metadata, retakePicture }: any) => {
+  const mintPicture = async () => {
+    // console.log("Metadata in mintPicture:", sendMetadata);
+    try {
+      console.log("try");
+      const test = await axios.post(
+        "https://besu.realfromkorea.com/besu/mintNFT",
+        {
+          metadata: sendMetadata,
+        },
+      );
+      // console.log(test);
+    } catch (error: any) {
+      // console.log(error);
+      console.log(error.response);
+    } finally {
+      console.log("zzzzzz");
+    }
+  };
+
+  const CameraPreview = ({
+    photo,
+    metadata,
+    retakePicture,
+    mintPicture,
+  }: any) => {
     return (
       <View style={styles.cameraPreview}>
         <ImageBackground
@@ -62,13 +98,20 @@ export default function TabOneScreen() {
             flex: 1,
           }}
         >
-          <Text style={styles.metaInfo}>{metadata}</Text>
+          <ScrollView style={styles.metaInfo}>
+            <Text style={{ color: "white", marginVertical: "5%" }}>
+              {metadata}
+            </Text>
+          </ScrollView>
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.buttonRetake}
               onPress={retakePicture}
             >
               <Text style={styles.text}>Re-Take</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonMint} onPress={mintPicture}>
+              <Text style={styles.text}>Mint</Text>
             </TouchableOpacity>
           </View>
         </ImageBackground>
@@ -83,6 +126,7 @@ export default function TabOneScreen() {
           photo={capturedImage}
           metadata={metadata}
           retakePicture={retakePicture}
+          mintPicture={mintPicture}
         ></CameraPreview>
       ) : (
         <Camera
@@ -151,6 +195,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 4,
   },
+  buttonMint: {
+    flex: 1,
+    alignSelf: "flex-end",
+    alignItems: "center",
+    borderRadius: 4,
+  },
   buttonTake: {
     width: 70,
     height: 70,
@@ -166,13 +216,13 @@ const styles = StyleSheet.create({
     position: "absolute",
     backgroundColor: "rgba(59, 59, 59, 0.6)",
     width: "92%",
-    height: "50%",
+    height: "30%",
     color: "white",
     fontSize: 15,
     textAlign: "left",
-    paddingLeft: 10,
-    paddingTop: 5,
-    marginLeft: "4%",
-    marginTop: "10%",
+    paddingStart: "5%",
+    paddingEnd: "5%",
+    marginStart: "4%",
+    marginTop: "5%",
   },
 });
