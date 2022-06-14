@@ -66,21 +66,15 @@ export default function TabOneScreen() {
   };
 
   const mintPicture = async () => {
-    // console.log("Metadata in mintPicture:", sendMetadata);
     try {
-      console.log("try");
       const test = await axios.post(
         "https://besu.realfromkorea.com/besu/mintNFT",
         {
           metadata: sendMetadata,
         },
       );
-      // console.log(test);
     } catch (error: any) {
-      // console.log(error);
       console.log(error.response);
-    } finally {
-      console.log("zzzzzz");
     }
   };
 
