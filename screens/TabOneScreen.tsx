@@ -6,13 +6,11 @@ import {
 } from "react-native";
 
 import { Text, View } from "../components/Themed";
-import { RootTabScreenProps } from "../types";
 
 import { Camera, CameraType } from "expo-camera";
 import { useState, useEffect } from "react";
 
 import axios from "axios";
-import { createIconSetFromFontello } from "@expo/vector-icons";
 
 export default function TabOneScreen() {
   const [hasPermission, setHasPermission] = useState(false);
