@@ -64,21 +64,21 @@ export default function TabOneScreen() {
   };
 
   const mintPicture = async () => {
-    console.log(metadata);
+    console.log(sendMetadata);
     try {
       const test = await axios.post(
-        "https://besu.realfromkorea.com/besu/mintNFT",
+        "https://test-besu.bsquarelab.com/besu/mintNFT",
         // "http://localhost:3000/besu/mintNFT",
         {
-          name: "TestMint1",
+          name: "TestMintNoVPN",
           data: sendMetadata,
           userPk:
-            "1b867ffe3bea49abb24971e4ba1a2bd5fdd204fafbc160b372154fe2e0d55f6f",
-          contractAddress: "0x361934ff6300c883513e6242cc67e2f9af92cd2f",
+            "004c011ef6840204c23e11da5476e621eb8b3c0e934585fa8a12d2b2b2606f00",
+          contractAddress: "0xA43899f3A50C9268D907C563F0cc0f8E8de9d6C0",
         },
       );
     } catch (error: any) {
-      console.log(error.response);
+      console.log(error.message);
     }
   };
 
