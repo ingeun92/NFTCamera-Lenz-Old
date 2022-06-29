@@ -70,11 +70,11 @@ export default function TabOneScreen() {
         "https://test-besu.bsquarelab.com/besu/mintNFT",
         // "http://localhost:3000/besu/mintNFT",
         {
-          name: "TestMintNoVPN",
+          name: "TestMint",
           data: sendMetadata,
           userPk:
             "004c011ef6840204c23e11da5476e621eb8b3c0e934585fa8a12d2b2b2606f00",
-          contractAddress: "0xA43899f3A50C9268D907C563F0cc0f8E8de9d6C0",
+          contractAddress: "0x4473f5f742D927e39dDbF5cF50cA597295cD21E4",
         },
       );
     } catch (error: any) {
