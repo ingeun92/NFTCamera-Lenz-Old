@@ -21,6 +21,22 @@ export default function TabOneScreen() {
   const [metadata, setMetadata] = useState("");
   const [sendMetadata, setSendMetadata] = useState<any>(null);
 
+  interface sendData {
+    name: string;
+    description: string;
+    image: string;
+    attributes: Array<object>;
+    data: object;
+    verification: {
+      service: string;
+      hash: string;
+      uuid: string;
+      signature: string;
+    };
+    userPk: string;
+    contractAddress: string;
+  }
+
   let camera: Camera;
 
   useEffect(() => {
@@ -65,17 +81,31 @@ export default function TabOneScreen() {
 
   const mintPicture = async () => {
     console.log(sendMetadata);
+    const sendData: sendData = {
+      description: "Test NFT for NFTCamera",
+      name: "Yes",
+      image: "https://www.naver.com",
+      attributes: [
+        { trait_type: "Level", value: "3" },
+        { trait_type: "Str", value: "300" },
+      ],
+      data: sendMetadata,
+      verification: {
+        service: "B-SquareLab",
+        hash: "",
+        uuid: "",
+        signature: "",
+      },
+      userPk:
+        "004c011ef6840204c23e11da5476e621eb8b3c0e934585fa8a12d2b2b2606f00",
+      contractAddress: "0x4473f5f742D927e39dDbF5cF50cA597295cD21E4",
+    };
+
     try {
       const test = await axios.post(
         "https://test-besu.bsquarelab.com/besu/mintNFT",
         // "http://localhost:3000/besu/mintNFT",
-        {
-          name: "TestMint",
-          data: sendMetadata,
-          userPk:
-            "004c011ef6840204c23e11da5476e621eb8b3c0e934585fa8a12d2b2b2606f00",
-          contractAddress: "0x4473f5f742D927e39dDbF5cF50cA597295cD21E4",
-        },
+        sendData,
       );
     } catch (error: any) {
       console.log(error.message);
