@@ -82,8 +82,8 @@ export default function TabOneScreen() {
   const mintPicture = async () => {
     console.log(sendMetadata);
     const sendData: sendData = {
-      description: "Test NFT for NFTCamera",
       name: "Yes",
+      description: "Test NFT for NFTCamera",
       image: "https://www.naver.com",
       attributes: [
         { trait_type: "Level", value: "3" },
