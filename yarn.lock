@@ -2849,12 +2849,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-native@npm:^0.69.2":
-  version: 0.69.2
-  resolution: "@types/react-native@npm:0.69.2"
+"@types/react-native@npm:^0.69.3":
+  version: 0.69.3
+  resolution: "@types/react-native@npm:0.69.3"
   dependencies:
     "@types/react": "*"
-  checksum: 210a658415726e15560a9b7ee2392e9ac5d89587aac86b9d4e73367c154e0fb79161e7933cc66b72bf562cd6f42f36d6563bd1ae272da57b6b96a45c25881869
+  checksum: 7d5aa4b30385e232fed74bdebeba1c7ee73b4237ca5a310fee6f9b98432ed2f3a737f2755c528fd5b03485278e98bd0b152692df5e146cb2603827ab939841dc
   languageName: node
   linkType: hard
 
@@ -8421,7 +8421,7 @@ __metadata:
     "@react-navigation/native": ^6.0.11
     "@react-navigation/native-stack": ^6.7.0
     "@types/react": ~18.0.15
-    "@types/react-native": ^0.69.2
+    "@types/react-native": ^0.69.3
     axios: ^0.27.2
     expo: ~45.0.6
     expo-asset: ~8.5.0
