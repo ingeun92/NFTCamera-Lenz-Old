@@ -12,6 +12,8 @@ import { useState, useEffect } from "react";
 
 import axios from "axios";
 
+import Config from "react-native-config";
+
 export default function TabOneScreen() {
   const [hasPermission, setHasPermission] = useState(false);
   const [type, setType] = useState(CameraType.back);
@@ -25,7 +27,10 @@ export default function TabOneScreen() {
     name: string;
     description: string;
     image: string;
-    attributes: Array<object>;
+    attributes: Array<{
+      trait_type: string;
+      value: string;
+    }>;
     data: object;
     verification: {
       service: string;
@@ -96,9 +101,9 @@ export default function TabOneScreen() {
         uuid: "",
         signature: "",
       },
-      userPk:
-        "004c011ef6840204c23e11da5476e621eb8b3c0e934585fa8a12d2b2b2606f00",
-      contractAddress: "0x4473f5f742D927e39dDbF5cF50cA597295cD21E4",
+      // TODO: move to .env userPk and contractAddress
+      userPk: Config.USER_PK,
+      contractAddress: Config.CONTRACT_ADDRESS,
     };
 
     try {
