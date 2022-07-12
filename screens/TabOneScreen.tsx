@@ -101,7 +101,6 @@ export default function TabOneScreen() {
         uuid: "",
         signature: "",
       },
-      // TODO: move to .env userPk and contractAddress
       userPk: Config.USER_PK,
       contractAddress: Config.CONTRACT_ADDRESS,
     };
