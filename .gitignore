@@ -23,6 +23,7 @@ yarn-error.log
 .direnv
 
 # Env
+.env
 .envrc.local
 
 # Emacs
